@@ -9,7 +9,7 @@ app.use(express.json());
 app.use(
   morgan(function (tokens, req, res) {
     let person = null;
-    if (req.params !== null && req.params.hasOwnProperty('id')) {
+    if (req.hasOwnProperty('params') && req.params.hasOwnProperty('id')) {
       const id = Number(req.params.id);
       person = persons.find((p) => p.id === id);
     }
