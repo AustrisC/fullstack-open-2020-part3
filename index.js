@@ -8,30 +8,11 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static('build'));
 
+morgan.token('request-body', (request) => JSON.stringify(request.body));
 app.use(
-  morgan(function (tokens, req, res) {
-    let person = null;
-    if (req.params && req.params.hasOwnProperty('id')) {
-      const id = Number(req.params.id);
-      person = persons.find((p) => p.id === id);
-    }
-
-    const result = [
-      tokens.method(req, res),
-      tokens.url(req, res),
-      tokens.status(req, res),
-      tokens.res(req, res, 'content-length'),
-      '-',
-      tokens['response-time'](req, res),
-      'ms',
-    ];
-
-    if (person !== null) {
-      result.push(JSON.stringify(person));
-    }
-
-    return result.join(' ');
-  })
+  morgan(
+    ':method :url :status :res[content-length] - :response-time ms :request-body'
+  )
 );
 
 let persons = [
