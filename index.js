@@ -78,6 +78,18 @@ app.post('/api/persons', async (req, res, next) => {
       .json({ error: 'new person object is missing a phone number' });
   }
 
+  if (req.body.name.length < 3) {
+    return res
+      .status(400)
+      .json({ error: 'Name must be at least 3 characters long' });
+  }
+
+  if (req.body.number.length < 8) {
+    return res
+      .status(400)
+      .json({ error: 'Number must be at least 8 characters long' });
+  }
+
   const newPerson = new Person({
     name: req.body.name,
     number: req.body.number,
