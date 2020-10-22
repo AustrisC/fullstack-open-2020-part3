@@ -125,7 +125,7 @@ const errorHandler = (error, req, res, next) => {
   }
 
   if (error.name === 'ValidationError') {
-    return res.status(400).json({ errorMessage: error.message });
+    return res.status(409).json({ errorMessage: error.message });
   }
 
   return next(error);
