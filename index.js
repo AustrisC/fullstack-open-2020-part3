@@ -3,7 +3,7 @@ const express = require('express');
 
 const morgan = require('morgan');
 const cors = require('cors');
-const Person = require('./person');
+const Person = require('./person.js');
 
 const app = express();
 
